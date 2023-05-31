@@ -1,6 +1,6 @@
 namespace Entities
 
-module Imagem =
+module Image =
 
   type T = { Id: int
              FileName: string }

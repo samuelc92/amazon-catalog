@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Domain/Entities/Image.fs" />
     <Compile Include="Domain/Entities/CategoryType.fs" />
     <Compile Include="Domain/Entities/Category.fs" />
     <Compile Include="Domain/Entities/Product.fs" />
