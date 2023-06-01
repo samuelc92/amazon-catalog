@@ -2,6 +2,8 @@ open System
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.Hosting
 
+Dapper.FSharp.PostgreSQL.OptionTypes.register()
+
 [<EntryPoint>]
 let main args =
     let builder = WebApplication.CreateBuilder(args)
