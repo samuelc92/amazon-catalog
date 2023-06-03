@@ -4,6 +4,7 @@
     <RootNamespace>amazon_catalog</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Helpers.fs" />
     <Compile Include="Domain/Entities/Image.fs" />
     <Compile Include="Domain/Entities/CategoryType.fs" />
     <Compile Include="Domain/Entities/Category.fs" />
