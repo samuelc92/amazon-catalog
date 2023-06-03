@@ -2,7 +2,9 @@ namespace Entities
 
 module Product =
 
-  type T = { Id: int
+  open System
+
+  type T = { Id: Guid 
              Name: string
              Description: string
              Price: decimal
@@ -11,11 +13,11 @@ module Product =
              Active: bool }
 
   let create name description price =
-    { T.Id=0
+    { T.Id = Guid.NewGuid()
       T.Name=name
       T.Description=description
       T.Price=price
       //T.Categories=categories
       //T.Images=images
-      Active=true }
+      T.Active=true }
      
