@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4D86811C-B89F-4E39-BBB6-BE7AFED6DB97}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Amazon.Catalog.Core", "src\Amazon.Catalog.Core\Amazon.Catalog.Core.fsproj", "{B62FE4A3-78A8-400C-9C56-3C4AF42385B2}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Amazon.Catalog.Adapters", "src\Amazon.Catalog.Adapters\Amazon.Catalog.Adapters.fsproj", "{469206C2-6F4A-4115-BD86-141797921567}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Amazon.Catalog.WebApi", "src\Amazon.Catalog.WebApi\Amazon.Catalog.WebApi.fsproj", "{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B62FE4A3-78A8-400C-9C56-3C4AF42385B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B62FE4A3-78A8-400C-9C56-3C4AF42385B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B62FE4A3-78A8-400C-9C56-3C4AF42385B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B62FE4A3-78A8-400C-9C56-3C4AF42385B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{469206C2-6F4A-4115-BD86-141797921567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{469206C2-6F4A-4115-BD86-141797921567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{469206C2-6F4A-4115-BD86-141797921567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{469206C2-6F4A-4115-BD86-141797921567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B62FE4A3-78A8-400C-9C56-3C4AF42385B2} = {4D86811C-B89F-4E39-BBB6-BE7AFED6DB97}
+		{469206C2-6F4A-4115-BD86-141797921567} = {4D86811C-B89F-4E39-BBB6-BE7AFED6DB97}
+		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18} = {4D86811C-B89F-4E39-BBB6-BE7AFED6DB97}
+	EndGlobalSection
+EndGlobal

@@ -1,4 +1,4 @@
-namespace Entities
+namespace Amazon.Catalog.Core.Entities
 
 module Category =
   
