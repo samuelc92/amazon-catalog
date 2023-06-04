@@ -1,8 +1,10 @@
-open System
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.Hosting
+open System
+open System.Threading.Tasks
 
-open Adapters.Repositories
+open Amazon.Catalog.Application.CommandHandler
+open Amazon.Catalog.Helpers
 open Entities
 
 Dapper.FSharp.PostgreSQL.OptionTypes.register()
@@ -14,8 +16,14 @@ let main args =
 
     app.MapGet("/", Func<string>(fun () -> "Hello World!")) |> ignore
 
-    app.MapPost("/", Func<Product.T, unit>(fun (product) -> Product.create product.Name product.Description product.Price |>  ProductRepository.insert)) |> ignore
-
+    app.MapPost("/", Func<Product.T, unit>(
+      fun (product) ->
+        //TODO: Create a request type
+        Product.create product.Name product.Description product.Price
+        |> createProduct 
+        |> Api.ofResult 
+        |> Async.AwaitTask )) |> ignore
+        
     app.Run()
 
     0 // Exit code

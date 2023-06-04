@@ -10,6 +10,7 @@
     <Compile Include="Domain/Entities/Category.fs" />
     <Compile Include="Domain/Entities/Product.fs" />
     <Compile Include="Adapters/Repositories/ProductRepository.fs" />
+    <Compile Include="Application/CommandHandler.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
