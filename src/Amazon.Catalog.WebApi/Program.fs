@@ -5,14 +5,13 @@ open Falco.Routing
 open Falco.HostBuilder
 
 open Amazon.Catalog.Adapters.Data.Repositories
+open Amazon.Catalog.Core
 open Amazon.Catalog.Core.Entities
-
-let handleGenericBadRequest _ =
-    Response.withStatusCode 400 >> Response.ofPlainText "Bad request"
 
 let handleError =
   function
-  | ProductRepository.DbError (message, _) -> Response.withStatusCode 500 >> Response.ofPlainText message
+  | DbError (message, _) -> Response.withStatusCode 500 >> Response.ofPlainText message
+  | NotFoundError _ -> Response.withStatusCode 404 >> Response.ofEmpty  
 
 let create : HttpHandler =
   let handleCreate prod : HttpHandler =

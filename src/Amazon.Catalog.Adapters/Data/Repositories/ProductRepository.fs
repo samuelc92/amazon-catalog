@@ -5,13 +5,11 @@ module ProductRepository =
   open Npgsql
   open System
 
+  open Amazon.Catalog.Core
   open Amazon.Catalog.Core.Entities
 
   let conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=postgres;")
 
-  type Error =
-    | NotFoundError of string
-    | DbError of (string * Exception)
 
   let insert(prod: Product.T) =
     conn
@@ -29,7 +27,7 @@ module ProductRepository =
       | Error error ->
         match error with
           | DbExecutionError err -> Error (DbError (err.Statement, err.Error :> Exception))
-          | DbConnectionError err -> Error (DbError (err.ConnectionString, err.Error))
+          | DbConnectionError err -> Error (DbError ("Invalid connection string", err.Error))
           | DbTransactionError err -> Error (DbError ("Transaction error", err.Error))
           | DataReaderCastError err -> Error (DbError (err.FieldName, err.Error :> Exception))
           | DataReaderOutOfRangeError err -> Error (DbError (err.FieldName, err.Error :> Exception))
