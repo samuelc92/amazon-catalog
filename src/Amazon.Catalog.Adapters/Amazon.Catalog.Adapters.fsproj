@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Include="Library.fs" />
+    <Compile Include="Data/Helpers.fs" />
     <Compile Include="Data/Repositories/ProductRepository.fs" />
   </ItemGroup>
 

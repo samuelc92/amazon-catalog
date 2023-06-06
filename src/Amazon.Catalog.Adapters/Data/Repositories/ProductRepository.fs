@@ -1,10 +1,11 @@
-module Amazon.Catalog.Adapters.Data.Repositories
+namespace Amazon.Catalog.Adapters.Data.Repositories
 
 module ProductRepository =
   open Donald
   open Npgsql
   open System
 
+  open Amazon.Catalog.Adapters.Data
   open Amazon.Catalog.Core
   open Amazon.Catalog.Core.Entities
 
@@ -24,10 +25,4 @@ module ProductRepository =
     |> Db.exec
     |> function
       | Ok _      -> Ok prod
-      | Error error ->
-        match error with
-          | DbExecutionError err -> Error (DbError (err.Statement, err.Error :> Exception))
-          | DbConnectionError err -> Error (DbError ("Invalid connection string", err.Error))
-          | DbTransactionError err -> Error (DbError ("Transaction error", err.Error))
-          | DataReaderCastError err -> Error (DbError (err.FieldName, err.Error :> Exception))
-          | DataReaderOutOfRangeError err -> Error (DbError (err.FieldName, err.Error :> Exception))
+      | Error err -> err |> Helper.convertDbError
