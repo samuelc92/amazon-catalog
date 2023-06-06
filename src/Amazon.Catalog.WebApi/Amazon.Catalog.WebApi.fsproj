@@ -9,6 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Donald" Version="9.0.1" />
     <PackageReference Include="Falco" Version="4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Amazon.Catalog.Adapters\Amazon.Catalog.Adapters.fsproj" />
+    <ProjectReference Include="..\Amazon.Catalog.Core\Amazon.Catalog.Core.fsproj" />
   </ItemGroup>
 </Project>
