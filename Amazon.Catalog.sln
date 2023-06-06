@@ -11,6 +11,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Amazon.Catalog.Adapters", "
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Amazon.Catalog.WebApi", "src\Amazon.Catalog.WebApi\Amazon.Catalog.WebApi.fsproj", "{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Amazon.Catalog.Application", "src\Amazon.Catalog.Application\Amazon.Catalog.Application.fsproj", "{E354F419-4B26-4B21-A944-0EB46C4128EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +34,15 @@ Global
 		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E354F419-4B26-4B21-A944-0EB46C4128EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E354F419-4B26-4B21-A944-0EB46C4128EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E354F419-4B26-4B21-A944-0EB46C4128EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E354F419-4B26-4B21-A944-0EB46C4128EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B62FE4A3-78A8-400C-9C56-3C4AF42385B2} = {4D86811C-B89F-4E39-BBB6-BE7AFED6DB97}
 		{469206C2-6F4A-4115-BD86-141797921567} = {4D86811C-B89F-4E39-BBB6-BE7AFED6DB97}
 		{EDDAB45A-9B7B-48D4-B348-2EB4EB907B18} = {4D86811C-B89F-4E39-BBB6-BE7AFED6DB97}
+		{E354F419-4B26-4B21-A944-0EB46C4128EA} = {4D86811C-B89F-4E39-BBB6-BE7AFED6DB97}
 	EndGlobalSection
 EndGlobal
