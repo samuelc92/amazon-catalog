@@ -12,6 +12,6 @@ module Product =
              //Images: Image.T list
              Active: bool }
 
-  let create prod =
-    { prod with Id = Guid.NewGuid(); Active=true }
+  let create name description price=
+    { Id = Guid.NewGuid(); Name=name; Description=description; Price=price; Active=true }
      

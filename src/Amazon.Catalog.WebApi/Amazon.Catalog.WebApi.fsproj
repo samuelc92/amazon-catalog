@@ -15,5 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Amazon.Catalog.Adapters\Amazon.Catalog.Adapters.fsproj" />
     <ProjectReference Include="..\Amazon.Catalog.Core\Amazon.Catalog.Core.fsproj" />
+    <ProjectReference Include="..\Amazon.Catalog.Application\Amazon.Catalog.Application.fsproj" />
   </ItemGroup>
 </Project>

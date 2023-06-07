@@ -5,8 +5,8 @@ open Falco.Routing
 open Falco.HostBuilder
 
 open Amazon.Catalog.Adapters.Data.Repositories
+open Amazon.Catalog.Application.Comands
 open Amazon.Catalog.Core
-open Amazon.Catalog.Core.Entities
 
 let handleError =
   function
@@ -16,7 +16,7 @@ let handleError =
 let create : HttpHandler =
   let handleCreate prod : HttpHandler =
     prod
-    |> Product.create //TODO: Create a Request type
+    |> CreateProductCommand.createProduct
     |> ProductRepository.insert
     |> function
       | Ok prod -> prod |> Response.ofJson
