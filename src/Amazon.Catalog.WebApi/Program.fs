@@ -4,7 +4,6 @@ open Falco
 open Falco.Routing
 open Falco.HostBuilder
 
-open Amazon.Catalog.Adapters.Data.Repositories
 open Amazon.Catalog.Application.Comands
 open Amazon.Catalog.Core
 
@@ -14,10 +13,9 @@ let handleError =
   | NotFoundError _ -> Response.withStatusCode 404 >> Response.ofEmpty  
 
 let create : HttpHandler =
-  let handleCreate prod : HttpHandler =
-    prod
+  let handleCreate req : HttpHandler =
+    req 
     |> CreateProductCommand.createProduct
-    |> ProductRepository.insert
     |> function
       | Ok prod -> prod |> Response.ofJson
       | Error error -> handleError error
