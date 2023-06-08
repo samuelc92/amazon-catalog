@@ -40,9 +40,9 @@ let main args =
         endpoints [
             get "/" (Response.ofPlainText "Hello world Test")
 
-            post "/products" create
+            post "/api/products" create
 
-            get "/products" getProducts
+            get "/api/products" getProducts
         ]
     }
     0
