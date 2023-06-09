@@ -13,6 +13,9 @@ let handleError =
   | DbError (message, _) -> Response.withStatusCode 500 >> Response.ofPlainText message
   | NotFoundError _ -> Response.withStatusCode 404 >> Response.ofEmpty  
 
+let handleGenericBadRequest _ =
+  Response.withStatusCode 400 >> Response.ofPlainText "Bad request"
+
 let create: HttpHandler =
   let handleCreate req : HttpHandler =
     req 
@@ -22,6 +25,12 @@ let create: HttpHandler =
       | Error error -> handleError error
 
   Request.mapJson handleCreate
+
+let getIdFromRoute (routeCollection: RouteCollectionReader) =
+  routeCollection.TryGetGuid "id"
+  |> function
+    | Some id    -> Ok id
+    | _                        -> Error "No valid Id provided" 
 
 let getProducts: HttpHandler =
   Request.mapRoute
@@ -33,6 +42,18 @@ let getProducts: HttpHandler =
           prods |> Response.ofJson
         | Error error -> handleError error
       )
+
+let getProductsById: HttpHandler =
+  fun ctx ->
+    let route = Request.getRoute ctx
+    route.GetGuid "id"
+    |> ProductRepository.getById
+    |> function
+      | Ok prodOpt ->
+        match prodOpt with
+          | Some p     -> Response.ofJson p 
+          | _         -> handleError NotFoundError
+      | Error error -> handleError error
 
 [<EntryPoint>]
 let main args =
