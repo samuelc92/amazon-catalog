@@ -48,6 +48,6 @@ module ProductRepository =
     |> function
       | Ok prods ->
         match prods with
-          | prod :: _ -> Ok (Option.Some prod) 
-          | []        -> Ok Option.None
+          | prod :: _ -> Ok prod 
+          | []        -> Error (NotFoundError "Product not found")
       | Error err       -> err |> Helper.convertDbError
