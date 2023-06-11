@@ -4,14 +4,7 @@ open Falco
 open Falco.Routing
 open Falco.HostBuilder
 
-open Amazon.Catalog.Core
 open Amazon.Catalog.WebApi.Controllers
-
-let handleError (error: Error) : HttpHandler =
-  error
-  |> function
-    | DbError (message, _) -> Response.withStatusCode 500 >> Response.ofPlainText message
-    | NotFoundError _ -> Response.withStatusCode 404 >> Response.ofEmpty  
 
 [<EntryPoint>]
 let main args =
