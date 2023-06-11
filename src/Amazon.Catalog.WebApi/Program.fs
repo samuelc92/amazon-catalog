@@ -28,20 +28,6 @@ let create: HttpHandler =
 
   Request.mapJson handleCreate
 
-let getIdFromRoute (routeCollection: RouteCollectionReader) =
-  routeCollection.TryGetGuid "id"
-  |> function
-    | Some id   -> Ok id
-    | None             -> Error "No valid Id provided" 
-
-let getProductsById: HttpHandler = 
-  Request.mapRoute (fun r ->
-    r.GetGuid "id")
-  |> ProductRepository.getById
-  |> function
-    | Ok prod ->
-      prod |> Response.ofJson
-    | Error err -> handleError err
   
 [<EntryPoint>]
 let main args =
@@ -52,6 +38,8 @@ let main args =
             post "/api/products" create
 
             get "/api/products" ProductController.getProducts
+
+            get "/api/products/{id}" ProductController.getProductsById
         ]
     }
     0

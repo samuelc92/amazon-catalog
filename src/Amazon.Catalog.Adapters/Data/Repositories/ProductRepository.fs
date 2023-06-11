@@ -40,9 +40,9 @@ module ProductRepository =
 
   let getById id =
     Database.conn
-    |> Db.newCommand "SELECT * FROM public.product WHERE Id=@Id"
+    |> Db.newCommand "SELECT * FROM public.product WHERE \"Id\"=@Id"
     |> Db.setParams [
-      "Id", SqlType.Guid id
+      "@Id", SqlType.Guid id
     ]
     |> Db.query ofDataReader
     |> function
