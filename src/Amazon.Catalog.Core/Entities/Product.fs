@@ -1,8 +1,9 @@
 namespace Amazon.Catalog.Core.Entities
 
 module Product =
-
   open System
+
+  open Amazon.Catalog.Core
 
   type T = { Id: Guid 
              Name: string
@@ -14,4 +15,3 @@ module Product =
 
   let create name description price=
     { Id = Guid.NewGuid(); Name=name; Description=description; Price=price; Active=true }
-     
