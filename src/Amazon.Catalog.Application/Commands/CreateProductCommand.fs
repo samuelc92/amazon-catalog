@@ -10,4 +10,12 @@ module CreateProductCommand =
                    Price: decimal }
 
   let createProduct (req: Request) =
-    Product.create req.Name req.Description req.Price |> ProductRepository.insert
+    Product.create req.Name req.Description req.Price
+    |> function
+      | Ok product   ->
+        product
+        |> ProductRepository.insert
+        |> function
+          | Ok p -> Ok p
+          | Error err -> Error [err]
+      | Error errors -> Error errors

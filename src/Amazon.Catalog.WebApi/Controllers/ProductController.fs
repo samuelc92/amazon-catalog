@@ -31,6 +31,6 @@ module ProductController =
       |> CreateProductCommand.createProduct
       |> function
         | Ok prod -> prod |> Response.ofJson
-        | Error error -> handleError error
+        | Error error -> handleErrors error
 
     Request.mapJson handleCreate
