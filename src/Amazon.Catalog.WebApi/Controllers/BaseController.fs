@@ -7,6 +7,7 @@ module BaseController =
     open Falco
     
     open Amazon.Catalog.Core
+    open System.Text.Json
  
     let handleError (error: Error) : HttpHandler =
       error
@@ -16,9 +17,11 @@ module BaseController =
         | DomainError message -> Response.withStatusCode 400 >> Response.ofPlainText message
 
     let handleErrors (errors: Error list) : HttpHandler =
+      let jsonOption = JsonSerializerOptions()
+      jsonOption.PropertyNamingPolicy <- JsonNamingPolicy.CamelCase
       let problemDetails = {
         Title = "One or more validation errors occurred."
         Status = 400
         Errors = List.map (fun (err: Error) -> match err with | DomainError message -> message | _ -> "Internal server error.") errors 
       }
-      Response.withStatusCode 400 >> Response.ofJson problemDetails
+      Response.withStatusCode 400 >> Response.ofJsonOptions jsonOption problemDetails
