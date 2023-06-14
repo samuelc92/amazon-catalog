@@ -14,7 +14,7 @@ module ProductController =
         get
         |> function
           | Ok prods ->
-            prods |> Response.ofJson
+            prods |> Response.ofJsonOptions jsonOption
           | Error error -> handleError error
         )
   let getProductsById: HttpHandler = fun ctx ->
@@ -22,7 +22,7 @@ module ProductController =
     let id = r.GetGuid "id" 
     let prod = getById id
     match prod with
-      | Ok prod -> Response.ofJson prod ctx
+      | Ok prod -> Response.ofJsonOptions jsonOption prod ctx
       | Error err -> handleError err ctx
 
   let create: HttpHandler =
@@ -30,7 +30,7 @@ module ProductController =
       req 
       |> CreateProductCommand.createProduct
       |> function
-        | Ok prod -> prod |> Response.ofJson
+        | Ok prod -> prod |> Response.ofJsonOptions jsonOption
         | Error error -> handleErrors error
 
     Request.mapJson handleCreate

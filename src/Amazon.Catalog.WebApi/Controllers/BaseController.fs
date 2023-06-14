@@ -9,6 +9,11 @@ module BaseController =
   open Amazon.Catalog.Core
   open System.Text.Json
  
+  let jsonOption =
+    let option= JsonSerializerOptions()
+    option.PropertyNamingPolicy <- JsonNamingPolicy.CamelCase
+    option
+    
   let handleError (error: Error) : HttpHandler =
     error
     |> function
@@ -17,8 +22,6 @@ module BaseController =
       | DomainError message -> Response.withStatusCode 400 >> Response.ofPlainText message
 
   let handleErrors (errors: Error list) : HttpHandler =
-    let jsonOption = JsonSerializerOptions()
-    jsonOption.PropertyNamingPolicy <- JsonNamingPolicy.CamelCase
     let problemDetails = {
       Title = "One or more validation errors occurred."
       Status = 400
