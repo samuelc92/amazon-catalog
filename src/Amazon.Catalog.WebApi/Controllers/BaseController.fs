@@ -19,7 +19,12 @@ module BaseController =
     |> function
       | DbError (message, _) -> Response.withStatusCode 500 >> Response.ofPlainText message
       | NotFoundError _ -> Response.withStatusCode 404 >> Response.ofEmpty  
-      | DomainError message -> Response.withStatusCode 400 >> Response.ofPlainText message
+      | DomainError message ->
+        Response.withStatusCode 400
+        >> Response.ofJsonOptions jsonOption { Title=message; Status=400; Errors=[]}
+      | DomainErrors messages ->
+        Response.withStatusCode 400
+        >> Response.ofJsonOptions jsonOption { Title="One or more validation errors occurred."; Status=400; Errors=messages}
 
   let handleErrors (errors: Error list) : HttpHandler =
     let problemDetails = {

@@ -17,5 +17,5 @@ module CreateProductCommand =
         |> ProductRepository.insert
         |> function
           | Ok p -> Ok p
-          | Error err -> Error [err]
+          | Error err -> Error err
       | Error errors -> Error errors

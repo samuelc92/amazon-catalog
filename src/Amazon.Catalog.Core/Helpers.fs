@@ -6,3 +6,4 @@ type Error =
 | NotFoundError of string
 | DbError of (string * Exception)
 | DomainError of string
+| DomainErrors of string list
