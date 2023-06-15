@@ -25,11 +25,3 @@ module BaseController =
       | DomainErrors messages ->
         Response.withStatusCode 400
         >> Response.ofJsonOptions jsonOption { Title="One or more validation errors occurred."; Status=400; Errors=messages}
-
-  let handleErrors (errors: Error list) : HttpHandler =
-    let problemDetails = {
-      Title = "One or more validation errors occurred."
-      Status = 400
-      Errors = List.map (fun (err: Error) -> match err with | DomainError message -> message | _ -> "Internal server error.") errors 
-    }
-    Response.withStatusCode 400 >> Response.ofJsonOptions jsonOption problemDetails
