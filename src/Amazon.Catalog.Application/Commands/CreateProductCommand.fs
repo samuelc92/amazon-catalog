@@ -3,7 +3,8 @@ namespace Amazon.Catalog.Application.Comands
 [<RequireQualifiedAccess>]
 module CreateProductCommand =
   open System
-
+   
+  open Amazon.Catalog.Core
   open Amazon.Catalog.Core.Entities
   open Amazon.Catalog.Adapters.Data.Repositories
 
@@ -18,7 +19,17 @@ module CreateProductCommand =
       Price=req.Price
       Active=true }
 
+  let checkIfProductExist (prod: Product.T) =
+    ProductRepository.getByName prod.Name
+    |> function
+      | Ok result ->
+        match result with
+        | Some _ -> Error (DomainError ("Product already exists."))
+        | None -> Ok prod
+      | Error err  -> Error err
+
   let createProduct (req: Request) =
     createEntity req
     |> Product.validate
+    |> Result.bind checkIfProductExist
     |> Result.bind ProductRepository.insert

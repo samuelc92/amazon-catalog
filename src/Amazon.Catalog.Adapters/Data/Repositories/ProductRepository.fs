@@ -51,3 +51,17 @@ module ProductRepository =
           | prod :: _ -> Ok prod 
           | []        -> Error (NotFoundError "Product not found")
       | Error err       -> err |> Helper.convertDbError
+
+  let getByName name =
+    Database.conn
+    |> Db.newCommand "SELECT * FROM public.product WHERE \"Name\"=@Name"
+    |> Db.setParams [
+      "@Name", SqlType.String name 
+    ]
+    |> Db.query ofDataReader
+    |> function
+      | Ok prods ->
+        match prods with
+          | prod :: _ -> Ok (Some prod) 
+          | []        -> Ok None
+      | Error err       -> err |> Helper.convertDbError
