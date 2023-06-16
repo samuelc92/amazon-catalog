@@ -13,12 +13,12 @@ module Product =
              //Images: Image.T list
              Active: bool }
 
-  let create name description price=
+  let validate prod =
     let errors = List.collect (fun (isValid, error) -> if isValid then [] else [error]) [
-      (not (String.IsNullOrEmpty name), "Invalid name.")
-      (not (String.IsNullOrEmpty description), "Invalid description.")
-      (Decimal.IsPositive price, "Invalid price.")]
+      (not (String.IsNullOrEmpty prod.Name), "Invalid name.")
+      (not (String.IsNullOrEmpty prod.Description), "Invalid description.")
+      (Decimal.IsPositive prod.Price, "Invalid price.")]
 
     match errors with
-    | [] -> Ok { Id = Guid.NewGuid(); Name=name; Description=description; Price=price; Active=true }
+    | [] -> Ok prod
     | l  -> Error (DomainErrors l)  
