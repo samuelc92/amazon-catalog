@@ -34,3 +34,11 @@ module ProductController =
         | Error error -> handleError error
 
     Request.mapJson handleCreate
+
+  let delete: HttpHandler = fun ctx ->
+    let r = Request.getRoute ctx
+    let id = r.GetGuid "id" 
+    let result = DeleteProductCommand.handle id
+    match result with
+      | Ok _ -> Response.ofEmpty ctx
+      | Error err -> handleError err ctx

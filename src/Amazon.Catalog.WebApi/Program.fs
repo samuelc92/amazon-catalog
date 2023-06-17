@@ -14,6 +14,8 @@ let main args =
 
             post "/api/products"  ProductController.create
 
+            delete "/api/products/{id}"  ProductController.delete
+
             get "/api/products" ProductController.getProducts
 
             get "/api/products/{id}" ProductController.getProductsById
