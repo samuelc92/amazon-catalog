@@ -7,16 +7,16 @@ module ProductController =
   open Amazon.Catalog.WebApi.Controllers.BaseController
   open Amazon.Catalog.Application.Comands
 
-  let getProducts: HttpHandler =
-    Request.mapRoute
-      (ignore)
-      (fun _ ->
-        get
-        |> function
-          | Ok prods ->
-            prods |> Response.ofJsonOptions jsonOption
-          | Error error -> handleError error
-        )
+  let getProducts: HttpHandler = fun ctx ->
+    let q = Request.getQuery ctx
+    let page = q.GetInt ("page", 0)
+    let pageSize = q.GetInt("pageSize", 10)
+    let offset = if page = 0 then page else page * pageSize
+    get pageSize offset 
+    |> function
+      | Ok prods -> Response.ofJsonOptions jsonOption prods  ctx 
+      | Error error -> handleError error ctx
+
   let getProductsById: HttpHandler = fun ctx ->
     let r = Request.getRoute ctx
     let id = r.GetGuid "id" 

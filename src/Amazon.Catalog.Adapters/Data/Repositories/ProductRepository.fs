@@ -30,9 +30,13 @@ module ProductRepository =
       Price       = rd.ReadDecimal "Price"
       Active      = rd.ReadBoolean "Active" }
     
-  let get: Result<Product.T list, Error> =
+  let get limit offset : Result<Product.T list, Error> =
     Database.conn
-    |> Db.newCommand "SELECT * FROM public.product"
+    |> Db.newCommand "SELECT * FROM public.product LIMIT @Limit OFFSET @Offset  "
+    |> Db.setParams [
+      "@Limit", SqlType.Int limit
+      "@Offset", SqlType.Int offset 
+    ]
     |> Db.query ofDataReader
     |> function
       | Ok prods -> Ok prods 
