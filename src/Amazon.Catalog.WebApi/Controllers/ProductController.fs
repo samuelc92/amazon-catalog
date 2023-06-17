@@ -14,7 +14,7 @@ module ProductController =
     let offset = if page = 0 then page else page * pageSize
     get pageSize offset 
     |> function
-      | Ok prods -> Response.ofJsonOptions jsonOption prods  ctx 
+      | Ok prods -> Response.ofJsonOptions jsonOption prods ctx 
       | Error error -> handleError error ctx
 
   let getProductsById: HttpHandler = fun ctx ->

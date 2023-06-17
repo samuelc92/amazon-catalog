@@ -22,6 +22,15 @@ module ProductRepository =
     |> function
       | Ok _      -> Ok prod
       | Error err -> err |> Helper.convertDbError
+
+  let delete id =
+    Database.conn
+    |> Db.newCommand "DELETE FROM public.product WHERE \"Id\"=@Id"
+    |> Db.setParams [ "@Id" , SqlType.Guid id]
+    |> Db.exec
+    |> function
+      | Ok _ -> Ok ()
+      | Error err -> err |> Helper.convertDbError
   
   let ofDataReader (rd: IDataReader): Product.T =
     { Id          = rd.ReadGuid "Id"
