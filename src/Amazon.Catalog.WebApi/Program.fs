@@ -3,22 +3,32 @@ module Amazon.Catalog.WebApi.Program
 open Falco
 open Falco.Routing
 open Falco.HostBuilder
+open Serilog
+open Serilog.Formatting.Compact
 
 open Amazon.Catalog.WebApi.Controllers
 
 [<EntryPoint>]
 let main args =
-    webHost args {
-        endpoints [
-            get "/" (Response.ofPlainText "Ping!")
+  Log.Logger <-
+    LoggerConfiguration()
+      .MinimumLevel.Debug()
+      .Enrich.FromLogContext()
+      //.WriteTo.Console(RenderedCompactJsonFormatter())
+      .WriteTo.Console()
+      .CreateLogger()
 
-            post "/api/products"  ProductController.create
+  webHost args {
+    endpoints [
+      get "/" (Response.ofPlainText "Ping!")
 
-            delete "/api/products/{id}"  ProductController.delete
+      post "/api/products"  ProductController.create
 
-            get "/api/products" ProductController.getProducts
+      delete "/api/products/{id}"  ProductController.delete
 
-            get "/api/products/{id}" ProductController.getProductsById
-        ]
-    }
-    0
+      get "/api/products" ProductController.getProducts
+
+      get "/api/products/{id}" ProductController.getProductsById
+    ]
+  }
+  0
