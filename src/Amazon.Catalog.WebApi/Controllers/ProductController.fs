@@ -2,17 +2,12 @@ namespace Amazon.Catalog.WebApi.Controllers
 
 module ProductController =
   open Falco
-  open Microsoft.Extensions.Logging
-  open Serilog
 
   open Amazon.Catalog.Adapters.Data.Repositories.ProductRepository
   open Amazon.Catalog.WebApi.Controllers.BaseController
   open Amazon.Catalog.Application.Comands
 
   let getProducts: HttpHandler = fun ctx ->
-    //let log = ctx.GetLogger("ProductController")
-    //log.Log(LogLevel.Information, "Getting products")
-    Log.Logger.Information("Getting products")
     let q = Request.getQuery ctx
     let page = q.GetInt ("page", 0)
     let pageSize = q.GetInt("pageSize", 10)
