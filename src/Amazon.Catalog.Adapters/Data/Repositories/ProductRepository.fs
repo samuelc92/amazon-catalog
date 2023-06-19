@@ -32,6 +32,20 @@ module ProductRepository =
       | Ok _ -> Ok ()
       | Error err -> err |> Helper.convertDbError
   
+  let update (product: Product.T)=
+    Database.conn
+    |> Db.newCommand "UPDATE public.product SET \"Name\"=@Name,\"Description\"=@Description,\"Price\"=@Price WHERE \"Id\"=@Id"
+    |> Db.setParams [
+      "@Id",          SqlType.Guid    product.Id 
+      "@Name",        SqlType.String  product.Name
+      "@Description", SqlType.String  product.Description
+      "@Price",       SqlType.Decimal product.Price 
+    ]
+    |> Db.exec
+    |> function
+      | Ok _ -> Ok ()
+      | Error err -> err |> Helper.convertDbError
+
   let ofDataReader (rd: IDataReader): Product.T =
     { Id          = rd.ReadGuid "Id"
       Name        = rd.ReadString "Name"
