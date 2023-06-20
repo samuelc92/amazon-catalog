@@ -28,7 +28,7 @@ module CreateProductCommand =
         | None -> Ok prod
       | Error err  -> Error err
 
-  let createProduct (req: Request) =
+  let handle (req: Request) =
     createEntity req
     |> Product.validate
     |> Result.bind checkIfProductExist

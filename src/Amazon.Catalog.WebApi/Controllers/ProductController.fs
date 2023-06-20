@@ -28,7 +28,7 @@ module ProductController =
   let create: HttpHandler =
     let handleCreate req : HttpHandler =
       req 
-      |> CreateProductCommand.createProduct
+      |> CreateProductCommand.handle
       |> function
         | Ok prod -> prod |> Response.ofJsonOptions jsonOption
         | Error error -> handleError error
