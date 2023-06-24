@@ -42,3 +42,18 @@ module ProductController =
     match result with
       | Ok _ -> Response.ofEmpty ctx
       | Error err -> handleError err ctx
+
+  let update: HttpHandler =
+    let handleUpdate input: HttpHandler =
+      fun ctx -> task {
+        let r = Request.getRoute ctx
+        let id = r.GetGuid "id"
+
+        input
+        |> UpdateProductCommand.handle 
+        |> function
+          | Ok prod -> prod |> Response.ofJsonOptions jsonOption
+          | Error error -> handleError error
+      }
+
+    Request.mapJson handleUpdate

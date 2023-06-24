@@ -2,11 +2,13 @@ module Amazon.Catalog.WebApi.Program
 
 open Falco
 open Falco.Routing
+open Falco.HttpHandler
 open Falco.HostBuilder
 open Microsoft.Extensions.Logging
 open Serilog
 
 open Amazon.Catalog.WebApi.Controllers
+open Amazon.Catalog.Core.Entities
 
 [<EntryPoint>]
 let main args =
@@ -29,6 +31,8 @@ let main args =
       get "/" (Response.ofPlainText "Ping!")
 
       post "/api/products"  ProductController.create
+
+      put "/api/products/{id}"  ProductController.update
 
       delete "/api/products/{id}"  ProductController.delete
 
