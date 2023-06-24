@@ -12,18 +12,13 @@ module ProductController =
     let page = q.GetInt ("page", 0)
     let pageSize = q.GetInt("pageSize", 10)
     let offset = if page = 0 then page else page * pageSize
-    get pageSize offset 
-    |> function
-      | Ok prods -> Response.ofJsonOptions jsonOption prods ctx 
-      | Error error -> handleError error ctx
+    handleResponse <| get pageSize offset <| ctx 
 
   let getProductsById: HttpHandler = fun ctx ->
     let r = Request.getRoute ctx
     let id = r.GetGuid "id" 
     let prod = getById id
-    match prod with
-      | Ok prod -> Response.ofJsonOptions jsonOption prod ctx
-      | Error err -> handleError err ctx
+    handleResponse prod ctx
 
   let create: HttpHandler =
     let handleCreate req : HttpHandler =
@@ -37,9 +32,7 @@ module ProductController =
     let r = Request.getRoute ctx
     let id = r.GetGuid "id" 
     let result = DeleteProductCommand.handle id
-    match result with
-      | Ok _ -> Response.ofEmpty ctx
-      | Error err -> handleError err ctx
+    handleResponse result ctx
 
   let update: HttpHandler =
     let handleUpdate input: HttpHandler =
