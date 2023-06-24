@@ -15,8 +15,8 @@ module Product =
 
   let validate prod =
     let errors = List.collect (fun (isValid, error) -> if isValid then [] else [error]) [
-      (not (String.IsNullOrEmpty prod.Name), "Invalid name.")
-      (not (String.IsNullOrEmpty prod.Description), "Invalid description.")
+      (String.noEmpty prod.Name, "Invalid name.")
+      (String.noEmpty prod.Description, "Invalid description.")
       (Decimal.IsPositive prod.Price, "Invalid price.")]
 
     match errors with

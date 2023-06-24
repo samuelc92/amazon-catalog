@@ -7,3 +7,7 @@ type Error =
 | DbError of (string * Exception)
 | DomainError of string
 | DomainErrors of string list
+
+module String =
+  let inline empty str = String.IsNullOrWhiteSpace(str)
+  let inline noEmpty str = not(empty str) 
