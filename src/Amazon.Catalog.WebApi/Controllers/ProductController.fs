@@ -29,9 +29,7 @@ module ProductController =
     let handleCreate req : HttpHandler =
       req 
       |> CreateProductCommand.handle
-      |> function
-        | Ok prod -> prod |> Response.ofJsonOptions jsonOption
-        | Error error -> handleError error
+      |> handleResponse
 
     Request.mapJson handleCreate
 
@@ -51,9 +49,7 @@ module ProductController =
 
         input
         |> UpdateProductCommand.handle 
-        |> function
-          | Ok prod -> prod |> Response.ofJsonOptions jsonOption
-          | Error error -> handleError error
+        |> handleResponse
       }
 
     Request.mapJson handleUpdate

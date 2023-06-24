@@ -13,8 +13,8 @@ module BaseController =
     let option= JsonSerializerOptions()
     option.PropertyNamingPolicy <- JsonNamingPolicy.CamelCase
     option
-    
-  let handleError (error: Error) : HttpHandler =
+
+  let handleError error  : HttpHandler =
     error
     |> function
       | DbError (message, _) -> Response.withStatusCode 500 >> Response.ofPlainText message
@@ -25,3 +25,8 @@ module BaseController =
       | DomainErrors messages ->
         Response.withStatusCode 400
         >> Response.ofJsonOptions jsonOption { Title="One or more validation errors occurred."; Status=400; Errors=messages}
+
+  let handleResponse res =
+    match res with
+      | Ok body -> body |> Response.ofJsonOptions jsonOption
+      | Error error -> error |> handleError
