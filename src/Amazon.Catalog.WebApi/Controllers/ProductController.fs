@@ -4,6 +4,7 @@ module ProductController =
   open Falco
 
   open Amazon.Catalog.Adapters.Data.Repositories.ProductRepository
+  open Amazon.Catalog.Core
   open Amazon.Catalog.WebApi.Controllers.BaseController
   open Amazon.Catalog.Application.Comands
 
@@ -35,14 +36,18 @@ module ProductController =
     handleResponse result ctx
 
   let update: HttpHandler =
-    let handleUpdate input: HttpHandler =
+    let handleUpdate (input: UpdateProductCommand.Request): HttpHandler =
       fun ctx -> task {
         let r = Request.getRoute ctx
         let id = r.GetGuid "id"
-
-        input
-        |> UpdateProductCommand.handle 
-        |> handleResponse
+        if (not (input.Id.Equals id)) then
+          handleResponse (Error (DomainError("Invalid id."))) ctx |> ignore
+        else
+          input
+          |>
+          UpdateProductCommand.handle
+          |> handleResponse <| ctx
+          |> ignore
       }
 
     Request.mapJson handleUpdate
