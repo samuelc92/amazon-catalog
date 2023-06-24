@@ -34,12 +34,16 @@ module ProductRepository =
   
   let update (product: Product.T)=
     Database.conn
-    |> Db.newCommand "UPDATE public.product SET \"Name\"=@Name,\"Description\"=@Description,\"Price\"=@Price WHERE \"Id\"=@Id"
+    |> Db.newCommand 
+      "UPDATE public.product
+      SET \"Name\"=@Name,\"Description\"=@Description,\"Price\"=@Price,\"Active\"=@Active
+      WHERE \"Id\"=@Id"
     |> Db.setParams [
       "@Id",          SqlType.Guid    product.Id 
       "@Name",        SqlType.String  product.Name
       "@Description", SqlType.String  product.Description
       "@Price",       SqlType.Decimal product.Price 
+      "@Active",      SqlType.Boolean product.Active 
     ]
     |> Db.exec
     |> function
