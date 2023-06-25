@@ -2,13 +2,11 @@ module Amazon.Catalog.WebApi.Program
 
 open Falco
 open Falco.Routing
-open Falco.HttpHandler
 open Falco.HostBuilder
 open Microsoft.Extensions.Logging
 open Serilog
 
 open Amazon.Catalog.WebApi.Controllers
-open Amazon.Catalog.Core.Entities
 
 [<EntryPoint>]
 let main args =
