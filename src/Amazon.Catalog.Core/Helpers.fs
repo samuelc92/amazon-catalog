@@ -13,4 +13,8 @@ module String =
   let inline noEmpty str = not(empty str) 
 
 module Utils =
-  let domainValidate (isValid, error) = if isValid then [] else [error]
+  let domainValidate t methods =
+    let errors = List.collect (fun (isValid, error) -> if isValid then [] else [error]) methods
+    match errors with
+      | [] -> Ok t
+      | _  -> Error (DomainErrors errors)

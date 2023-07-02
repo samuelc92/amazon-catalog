@@ -12,10 +12,6 @@ module CategoryType =
              ShowOnHome: bool}
 
   let validate ct=
-    let errors = List.collect (Utils.domainValidate) [
+    Utils.domainValidate ct [
       (String.noEmpty ct.Name, "Invalid name.")
       (String.noEmpty ct.Description, "Invalid description.")]
-
-    match errors with
-    | [] -> Ok ct
-    | l  -> Error (DomainErrors l)  
