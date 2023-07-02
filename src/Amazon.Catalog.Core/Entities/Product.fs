@@ -14,7 +14,7 @@ module Product =
              Active: bool }
 
   let validate prod =
-    let errors = List.collect (fun (isValid, error) -> if isValid then [] else [error]) [
+    let errors = List.collect (Utils.domainValidate) [
       (String.noEmpty prod.Name, "Invalid name.")
       (String.noEmpty prod.Description, "Invalid description.")
       (Decimal.IsPositive prod.Price, "Invalid price.")]

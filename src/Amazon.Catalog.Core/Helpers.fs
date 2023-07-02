@@ -11,3 +11,6 @@ type Error =
 module String =
   let inline empty str = String.IsNullOrWhiteSpace(str)
   let inline noEmpty str = not(empty str) 
+
+module Utils =
+  let domainValidate (isValid, error) = if isValid then [] else [error]
