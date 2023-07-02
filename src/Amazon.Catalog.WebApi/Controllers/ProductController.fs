@@ -44,8 +44,7 @@ module ProductController =
           handleResponse (Error (DomainError("Invalid id."))) ctx |> ignore
         else
           input
-          |>
-          UpdateProductCommand.handle
+          |> UpdateProductCommand.handle
           |> handleResponse <| ctx
           |> ignore
       }

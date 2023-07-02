@@ -6,4 +6,3 @@ module Category =
              Name: string
              Description: string
              CategoryType: CategoryType.T}
-             
