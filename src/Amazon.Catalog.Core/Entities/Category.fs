@@ -1,8 +1,17 @@
 namespace Amazon.Catalog.Core.Entities
 
 module Category =
+  open System
   
-  type T = { Id: int
+  open Amazon.Catalog.Core
+  
+  type T = { Id: Guid 
              Name: string
              Description: string
-             CategoryType: CategoryType.T}
+             Parent: T option
+             CategoryType: CategoryType.T }
+
+  let validate ct=
+    Utils.domainValidate ct [
+      (String.noEmpty ct.Name, "Invalid name.")
+      (String.noEmpty ct.Description, "Invalid description.")]
