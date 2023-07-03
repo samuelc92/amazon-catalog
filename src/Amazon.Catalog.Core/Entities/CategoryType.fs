@@ -9,7 +9,7 @@ module CategoryType =
              Name: string
              Description: string
              ShowOnMenu: bool
-             ShowOnHome: bool}
+             ShowOnHome: bool }
 
   let validate ct=
     Utils.domainValidate ct [
