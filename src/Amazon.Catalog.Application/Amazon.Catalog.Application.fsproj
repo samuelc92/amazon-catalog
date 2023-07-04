@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Commands/CreateCategoryTypeCommand.fs" />
     <Compile Include="Commands/CreateProductCommand.fs" />
     <Compile Include="Commands/DeleteProductCommand.fs" />
     <Compile Include="Commands/UpdateProductCommand.fs" />
