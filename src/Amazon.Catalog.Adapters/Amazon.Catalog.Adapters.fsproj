@@ -9,6 +9,7 @@
     <Compile Include="Data/Helpers.fs" />
     <Compile Include="Data/Database.fs" />
     <Compile Include="Data/Repositories/ProductRepository.fs" />
+    <Compile Include="Data/Repositories/CategoryTypeRepository.fs" />
   </ItemGroup>
 
   <ItemGroup>
