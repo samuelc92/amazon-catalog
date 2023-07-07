@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Include="Controllers/BaseController.fs" />
     <Compile Include="Controllers/ProductController.fs" />
+    <Compile Include="Controllers/CategoryTypeController.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
