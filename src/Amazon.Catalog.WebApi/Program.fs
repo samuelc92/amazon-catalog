@@ -39,6 +39,8 @@ let main args =
       get "/api/products/{id}" ProductController.getProductsById
 
       post "/api/categories-type"  CategoryTypeController.create
+
+      get "/api/categories-type" CategoryTypeController.getAll
     ]
   }
   0
