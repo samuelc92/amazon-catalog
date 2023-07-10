@@ -18,3 +18,5 @@ module Utils =
     match errors with
       | [] -> Ok t
       | _  -> Error (DomainErrors errors)
+
+  let (>>=) m f = Result.bind f m

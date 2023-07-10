@@ -4,9 +4,10 @@ namespace Amazon.Catalog.Application.Comands
 module CreateProductCommand =
   open System
    
+  open Amazon.Catalog.Adapters.Data.Repositories
   open Amazon.Catalog.Core
   open Amazon.Catalog.Core.Entities
-  open Amazon.Catalog.Adapters.Data.Repositories
+  open Amazon.Catalog.Core.Utils
 
   type Request = { Name: string
                    Description: string
@@ -31,5 +32,5 @@ module CreateProductCommand =
   let handle (req: Request) =
     createEntity req
     |> Product.validate
-    |> Result.bind checkIfProductExist
-    |> Result.bind ProductRepository.insert
+    >>= checkIfProductExist
+    >>= ProductRepository.insert
