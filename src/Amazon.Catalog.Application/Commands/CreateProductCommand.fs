@@ -13,11 +13,11 @@ module CreateProductCommand =
                    Price: decimal }
 
   let createEntity req : Product.T =
-    { Id = Guid.NewGuid()
-      Name=req.Name
-      Description=req.Description
-      Price=req.Price
-      Active=true }
+    { Id          = Guid.NewGuid()
+      Name        = req.Name
+      Description = req.Description
+      Price       = req.Price
+      Active      = true }
 
   let checkIfProductExist (prod: Product.T) =
     ProductRepository.getByName prod.Name
@@ -25,7 +25,7 @@ module CreateProductCommand =
       | Ok result ->
         match result with
         | Some _ -> Error (DomainError ("Product already exists."))
-        | None -> Ok prod
+        | None   -> Ok prod
       | Error err  -> Error err
 
   let handle (req: Request) =

@@ -24,7 +24,7 @@ module UpdateProductCommand =
           | Ok result ->
             match result with
             | Some _ -> Error (DomainError ("Product already exists."))
-            | None -> Ok {prod with Name=req.Name; Description=req.Description; Price=req.Price; Active=req.Active} 
+            | None   -> Ok {prod with Name=req.Name; Description=req.Description; Price=req.Price; Active=req.Active} 
           | Error err  -> Error err
       else
         Ok {prod with Name=req.Name; Description=req.Description; Price=req.Price; Active=req.Active} 
