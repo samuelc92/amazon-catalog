@@ -7,6 +7,7 @@ module UpdateProductCommand =
   open Amazon.Catalog.Core
   open Amazon.Catalog.Adapters.Data.Repositories
   open Amazon.Catalog.Core.Entities
+  open Amazon.Catalog.Core.Utils
 
   type Request = { Id: Guid
                    Name: string
@@ -33,5 +34,5 @@ module UpdateProductCommand =
   let handle (req: Request) =
     req
     |> convertToProd
-    |> Result.bind Product.validate
-    |> Result.bind ProductRepository.update
+    >>= Product.validate
+    >>= ProductRepository.update
