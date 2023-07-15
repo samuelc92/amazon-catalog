@@ -8,8 +8,8 @@ module Category =
   type T = { Id: Guid 
              Name: string
              Description: string
-             Parent: T option
-             CategoryType: CategoryType.T }
+             ParentId: Guid option
+             CategoryTypeId: Guid }
 
   let validate ct=
     Utils.domainValidate ct [

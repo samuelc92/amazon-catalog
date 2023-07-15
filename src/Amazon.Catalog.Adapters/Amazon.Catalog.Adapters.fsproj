@@ -10,6 +10,7 @@
     <Compile Include="Data/Database.fs" />
     <Compile Include="Data/Repositories/ProductRepository.fs" />
     <Compile Include="Data/Repositories/CategoryTypeRepository.fs" />
+    <Compile Include="Data/Repositories/CategoryRepository.fs" />
   </ItemGroup>
 
   <ItemGroup>
