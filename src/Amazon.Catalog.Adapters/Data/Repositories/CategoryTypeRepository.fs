@@ -41,3 +41,17 @@ module CategoryTypeRepository =
     |> function
       | Ok catTypes -> Ok catTypes 
       | Error err               -> err |> Helper.convertDbError
+
+  let getById id: Result<CategoryType.T option, Error> =
+    Database.conn
+    |> Db.newCommand "SELECT * FROM public.category_type WHERE id = @Id "
+    |> Db.setParams [
+      "@Id", SqlType.Guid id 
+    ]
+    |> Db.query ofDataReader
+    |> function
+      | Ok catTypes ->
+        match catTypes with
+          | catType :: _ -> Ok (Some catType)
+          | []           -> Ok None
+      | Error err               -> err |> Helper.convertDbError
