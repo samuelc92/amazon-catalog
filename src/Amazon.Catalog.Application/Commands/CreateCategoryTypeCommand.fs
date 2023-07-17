@@ -4,6 +4,7 @@ namespace Amazon.Catalog.Application.Comands
 module CreateCategoryTypeCommand =
   open System
    
+  open Amazon.Catalog.Core.Utils
   open Amazon.Catalog.Core.Entities
   open Amazon.Catalog.Adapters.Data.Repositories
    
@@ -22,4 +23,4 @@ module CreateCategoryTypeCommand =
   let handle (req: Input) =
     createEntity req
     |> CategoryType.validate
-    |> Result.bind CategoryTypeRepository.insert
+    >>= CategoryTypeRepository.insert
