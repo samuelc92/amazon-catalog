@@ -43,6 +43,8 @@ let main args =
       get "/api/categories-type" CategoryTypeController.getAll
 
       post "/api/categories-type" CategoryController.create
+
+      get "/api/categories" CategoryController.getAll
     ]
   }
   0
