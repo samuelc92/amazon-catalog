@@ -10,12 +10,12 @@ module CategoryRepository =
 
   let insert(category: Category.T) =
     Database.conn
-    |> Db.newCommand "INSERT INTO public.category VALUES (@Id,@Name,@Description,@CategoryId,@CategoryTypeId)"
+    |> Db.newCommand "INSERT INTO public.category VALUES (@Id,@Name,@Description,@ParentId,@CategoryTypeId)"
     |> Db.setParams [
       "@Id", SqlType.Guid category.Id
       "@Name", SqlType.String category.Name
       "@Description", SqlType.String category.Description
-      "@CategoryId", if Option.isNone category.ParentId then SqlType.Null else SqlType.Guid category.ParentId.Value
+      "@ParentId", if Option.isNone category.ParentId then SqlType.Null else SqlType.Guid category.ParentId.Value
       "@CategoryTypeId", SqlType.Guid category.CategoryTypeId
     ]
     |> Db.exec
@@ -27,7 +27,7 @@ module CategoryRepository =
     { Id             = rd.ReadGuid       "id"
       Name           = rd.ReadString     "name"
       Description    = rd.ReadString     "description"
-      ParentId       = rd.ReadGuidOption "category_id"
+      ParentId       = rd.ReadGuidOption "parent_id"
       CategoryTypeId = rd.ReadGuid       "category_type_id" }
 
   let get limit offset : Result<Category.T list, Error> =
