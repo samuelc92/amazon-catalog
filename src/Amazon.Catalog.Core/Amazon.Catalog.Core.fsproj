@@ -11,6 +11,7 @@
     <Compile Include="Entities/Category.fs" />
     <Compile Include="Entities/Image.fs" />
     <Compile Include="Entities/Product.fs" />
+    <Compile Include="Entities/ProductCategory.fs" />
   </ItemGroup>
   
   <ItemGroup>
