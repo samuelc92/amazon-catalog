@@ -11,6 +11,7 @@
     <Compile Include="Commands/CreateProductCommand.fs" />
     <Compile Include="Commands/DeleteProductCommand.fs" />
     <Compile Include="Commands/UpdateProductCommand.fs" />
+    <Compile Include="Commands/LinkProductWithCategoryCommand.fs" />
   </ItemGroup>
 
   <ItemGroup>
