@@ -45,6 +45,8 @@ let main args =
       post "/api/categories" CategoryController.create
 
       get "/api/categories" CategoryController.getAll
+
+      put "/api/categories/{id}/products/{productId}" CategoryController.linkProduct
     ]
   }
   0
