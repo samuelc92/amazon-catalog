@@ -5,3 +5,6 @@ module ProductCategory =
 
   type T = { ProductId: Guid 
              CategoryId: Guid }
+
+  let create (productId: Guid) (categoryId: Guid) =
+    { ProductId = productId; CategoryId = categoryId }

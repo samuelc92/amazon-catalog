@@ -7,17 +7,16 @@ module LinkProductWithCategoryCommand =
   open Amazon.Catalog.Adapters.Data.Repositories
   open Amazon.Catalog.Core
   open Amazon.Catalog.Core.Entities
-  open Amazon.Catalog.Core.Entities.ProductCategory
   open Amazon.Catalog.Core.Utils
 
-  let validateProduct (prodCat: T) =
+  let validateProduct (prodCat: ProductCategory.T) =
     prodCat.ProductId
     |> ProductRepository.getById
     |> function
       | Ok _  -> Ok prodCat 
       | Error err  -> Error err
 
-  let validateCategory(prodCat: T) =
+  let validateCategory(prodCat: ProductCategory.T) =
     prodCat.CategoryId
     |> CategoryRepository.getById
     |> function
@@ -26,7 +25,7 @@ module LinkProductWithCategoryCommand =
       | Error err  -> Error err
 
   let handle (productId: Guid) (categoryId: Guid) =
-    { ProductId = productId; CategoryId = categoryId }
+    ProductCategory.create productId categoryId
     |> validateProduct
     >>= validateCategory
     >>= ProductCategoryRepository.insert
