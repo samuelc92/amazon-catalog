@@ -23,6 +23,7 @@ bld/
 [Ll]og/
 
 .vscode/
+.vs/
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
