@@ -5,6 +5,7 @@ module CreateProductCommand =
   open System
    
   open Amazon.Catalog.Adapters.Data.Repositories
+  open Amazon.Catalog.Adapters.Dapr
   open Amazon.Catalog.Core
   open Amazon.Catalog.Core.Entities
   open Amazon.Catalog.Core.Utils
@@ -34,3 +35,4 @@ module CreateProductCommand =
     |> Product.validate
     >>= checkIfProductExist
     >>= ProductRepository.insert
+    >>= Queue.PublishEventAsync

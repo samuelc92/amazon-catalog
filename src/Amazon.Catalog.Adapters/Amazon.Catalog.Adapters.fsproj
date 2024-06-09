@@ -12,11 +12,13 @@
     <Compile Include="Data/Repositories/CategoryTypeRepository.fs" />
     <Compile Include="Data/Repositories/CategoryRepository.fs" />
     <Compile Include="Data/Repositories/ProductCategoryRepository.fs" />
+    <Compile Include="Dapr/Queue.fs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapr.Client" Version="1.13.1" />
     <PackageReference Include="Donald" Version="9.0.1" />
-    <PackageReference Include="Npgsql" Version="7.0.4" />
+    <PackageReference Include="Npgsql" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>
