@@ -3,7 +3,6 @@ namespace Amazon.Catalog.Adapters.Dapr
 [<RequireQualifiedAccess>]
 module Queue =
   open Dapr.Client
-  open Microsoft.Extensions.Logging
   open Serilog
 
   open Amazon.Catalog.Core.Entities
@@ -13,7 +12,7 @@ module Queue =
   let PublishEventAsync (product: Product.T) =
     Log.Logger.Information "Publishing product event"
     async {
-        daprClient.PublishEventAsync("productpubsub", "products", product)
+        daprClient.PublishEventAsync("pubsub", "products", product)
         |> Async.AwaitTask
         |> ignore
     }
